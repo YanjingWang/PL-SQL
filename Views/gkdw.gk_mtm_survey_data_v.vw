@@ -1,0 +1,63 @@
+DROP VIEW GKDW.GK_MTM_SURVEY_DATA_V;
+
+/* Formatted on 29/01/2021 11:32:45 (QP5 v5.115.810.9015) */
+CREATE OR REPLACE FORCE VIEW GKDW.GK_MTM_SURVEY_DATA_V
+(
+   EVAL_SUBMITTED_ID,
+   EXTERNAL_STUDENT_ID,
+   STUDENT_EMAIL,
+   EXTERNAL_CLASS_ID,
+   CLASS_END_DATE,
+   EXTERNAL_INSTRUCTOR_ID,
+   INSTRUCTOR_NAME,
+   EXTERNAL_COURSE_ID,
+   COURSE_NAME,
+   EXTERNAL_VENDOR_ID,
+   CHANNEL,
+   VENDOR,
+   VENDOR_LOCATION,
+   LEARNING_METHOD,
+   FORM_NAME,
+   QUESTION,
+   QUESTION_CATEGORY,
+   ANSWER,
+   ENTERED_DATE,
+   ANSWER_TYPE,
+   ENTRY_METHOD,
+   MTM_EVENT_ID,
+   QUESTION_ID,
+   CONNECTED_C,
+   CONNECTED_V_TO_C
+)
+AS
+   SELECT   EVAL_SUBMITTED_ID,
+            EXTERNAL_STUDENT_ID,
+            STUDENT_EMAIL,
+            EXTERNAL_CLASS_ID,
+            CLASS_END_DATE,
+            EXTERNAL_INSTRUCTOR_ID,
+            INSTRUCTOR_NAME,
+            EXTERNAL_COURSE_ID,
+            COURSE_NAME,
+            EXTERNAL_VENDOR_ID,
+            CHANNEL,
+            VENDOR,
+            VENDOR_LOCATION,
+            LEARNING_METHOD,
+            FORM_NAME,
+            QUESTION,
+            QUESTION_CATEGORY,
+            ANSWER,
+            ENTERED_DATE,
+            ANSWER_TYPE,
+            ENTRY_METHOD,
+            MTM_EVENT_ID,
+            QUESTION_ID,
+            ed.CONNECTED_C,
+            ed.CONNECTED_V_TO_C
+     FROM      GKDW.MTM_SURVEY_DATA mtm
+            LEFT JOIN
+               event_dim ed
+            ON mtm.EXTERNAL_CLASS_ID = ed.event_id;
+
+
